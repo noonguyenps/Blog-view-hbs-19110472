@@ -1,0 +1,24 @@
+<div>
+    {{#each infoBlog}}
+    <div class="info-blog">
+        <h1>{{content}}</h1>
+        <h2>Các bình luận</h2>
+        {{#each comments}}
+        <h3> - {{this}}</h3>
+        {{/each}}
+    </div>
+    <div class="row-add-comment">
+        <form action="/add/comment/{{id}}" method="post">
+        <textarea name="comment" placeholder="Bình luận"></textarea>
+        <input type="submit" value="Thêm bình luận"> 
+        </form>
+    </div>
+    <div class="row-add">
+        <form action="/edit/blog/{{id}}" method="post">
+        <h2>Chỉnh sửa bài viết của bạn</h2>
+        <textarea name="content" placeholder="Nội dung"></textarea>
+        <input type="submit" value="Chỉnh sửa bài viết"> 
+        </form>
+    </div>
+    {{/each}}
+</div>

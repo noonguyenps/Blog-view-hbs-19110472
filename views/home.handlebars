@@ -1,0 +1,25 @@
+<div>
+    {{#if empty}}
+    <div class="row">
+        <h2>Không có bài viết nào</h2>
+    </div>
+    {{else}}
+    {{#each blogList}}
+    <div class="row">
+        <h2>{{content}}</h2>
+        <a href="/{{id}}">Xem chi tiết</a>
+        <form action="blog/remove/{{id}}" method="post">
+        <input type="submit" value="Xóa">
+        </form>
+        <p>Bài viết có {{comments.length}} bình luận</p>
+    </div>
+    {{/each}}
+    {{/if}}
+    <div class="row-add">
+        <form action="add" method="post">
+        <h2>Thêm bài viết của bạn</h2>
+        <textarea name="content" placeholder="Nội dung"></textarea>
+        <input type="submit" value="Thêm bài viết"> 
+        </form>
+    </div>
+</div>
