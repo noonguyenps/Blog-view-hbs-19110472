@@ -7,7 +7,6 @@ const getListBlog = (req,res)=>{
 }
 
 const addBlog = (req,res)=>{
-    // console.log(req.method,req.url)
     var id = 1;
     var loop =  true;
     while(loop){
@@ -20,7 +19,6 @@ const addBlog = (req,res)=>{
     }
     const newBlog = new blog.contrustor(id,req.body.content)
     blogList.push(newBlog);
-    res.redirect('/');
 }
 const addComment = (req,res)=>{
     // console.log(req.method,req.url)
@@ -28,10 +26,6 @@ const addComment = (req,res)=>{
     const infoBlog = blogList.find(item=>item.id==id)
     if(infoBlog){
         infoBlog.comments.push(req.body.comment)
-        res.redirect('/'+id);
-    }
-    else{
-        res.render('error');
     }
 }
 const getInfoBlog = (req,res)=>{
@@ -40,11 +34,9 @@ const getInfoBlog = (req,res)=>{
     if(id){
         const infoBlog = blogList.filter(item=>item.id==id)
         if(infoBlog.length>0){
-            res.render('infoBlog', {
-                infoBlog: infoBlog
-            })
-        }else{
-            res.render('error');
+            res.statusCode = 200;
+            res.setHeader('Content-Type','application/json');
+            res.end(JSON.stringify(infoBlog));
         }
     }
 }
@@ -54,10 +46,9 @@ const deleteBlog = (req,res)=>{
     if(id){
         const i = blogList.findIndex(item=> item.id == id)
         blogList.splice(i,1);
-        res.redirect('/');
-    }
-    else{
-        res.render('error')
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json');
+        res.end(JSON.stringify(blogList));
     }
 }
 const updateBlog = (req,res)=>{
@@ -66,10 +57,6 @@ const updateBlog = (req,res)=>{
     const infoBlog = blogList.find(item=>item.id==id)
     if(infoBlog){
         infoBlog.content = req.body.content;
-        res.redirect('/'+id);
-    }
-    else{
-        res.render('error');
     }
 }
 module.exports = {
