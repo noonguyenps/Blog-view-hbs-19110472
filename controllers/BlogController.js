@@ -1,12 +1,9 @@
 const blog = require("../models/Blog")
 let blogList = blog.listBlog
 const getListBlog = (req,res)=>{
-    // console.log(req.method,req.url)
-    if(blogList.length!==0){  
-        res.render('home',{blogList:blogList, empty:0})
-    }else{
-        res.render('home',{empty:1})
-    }
+    res.statusCode = 200;
+    res.setHeader('Content-Type','application/json');
+    res.end(JSON.stringify(blogList));
 }
 
 const addBlog = (req,res)=>{
