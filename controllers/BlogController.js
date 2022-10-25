@@ -19,6 +19,9 @@ const addBlog = (req,res)=>{
     }
     const newBlog = new blog.contrustor(id,req.body.content)
     blogList.push(newBlog);
+    res.statusCode = 200;
+    res.setHeader('Content-Type','application/json');
+    res.end();
 }
 const addComment = (req,res)=>{
     // console.log(req.method,req.url)
@@ -26,6 +29,9 @@ const addComment = (req,res)=>{
     const infoBlog = blogList.find(item=>item.id==id)
     if(infoBlog){
         infoBlog.comments.push(req.body.comment)
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json');
+        res.end();
     }
 }
 const getInfoBlog = (req,res)=>{
@@ -57,6 +63,9 @@ const updateBlog = (req,res)=>{
     const infoBlog = blogList.find(item=>item.id==id)
     if(infoBlog){
         infoBlog.content = req.body.content;
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json');
+        res.end();
     }
 }
 module.exports = {
